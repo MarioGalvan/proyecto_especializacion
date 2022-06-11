@@ -1,7 +1,8 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
 
-export const firebaseConfig = {
+const firebaseConfig = {
   apiKey: "AIzaSyCkYso1DgUcd7UmfGQdcru9Wxb1sVc-itE",
   authDomain: "burguerfactory-90a58.firebaseapp.com",
   projectId: "burguerfactory-90a58",
@@ -11,5 +12,8 @@ export const firebaseConfig = {
   measurementId: "G-RCZWN46PDV",
 };
 
-const firebaseApp = initializeApp();
+const firebaseApp = initializeApp(firebaseConfig);
 const auth = getAuth(firebaseApp);
+const db = getFirestore(firebaseApp)
+
+export { auth, db, onAuthStateChanged };
