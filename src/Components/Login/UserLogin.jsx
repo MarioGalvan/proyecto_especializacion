@@ -14,7 +14,7 @@ export const UserLogin = () => {
         let {email, password} = values;
         userLogin(email, password).then((res)=>{
             console.log(res);
-            navigate('/categorias');
+            navigate('/dashboard');
         })
     };
 
