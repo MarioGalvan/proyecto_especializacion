@@ -1,13 +1,9 @@
 import React, { useState } from 'react'
-import logo from './logo.svg'
 import './App.css'
 import { UseTestingBackend } from './Services/User/TestBackend'
-import {BrowserRouter,Route,Routes} from 'react-router-dom'
-import Index from './Components/User/UI/index';
-import Products from './Components/User/UI/products';
+import { MainRouter } from './Routes/MainRouter'
 
 function App() {
-  const [count, setCount] = useState(0)
   const [dataTesting, setdataTesting] = useState([])
 
   React.useEffect(()=>{
@@ -20,16 +16,9 @@ function App() {
     })
   },[])
 
-  //console.log("dataTesting", dataTesting[0])
-
   return (
     <div className="App">
-      <BrowserRouter>
-        <Routes>
-          <Route path='/' element={<Index/>}/>
-          <Route path='/products' element={<Products/>}/>
-        </Routes>
-      </BrowserRouter>
+     <MainRouter />
     </div>
   )
 }
