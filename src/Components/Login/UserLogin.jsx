@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Checkbox, Form, Input, Card, Row } from 'antd';
+import { Button, Checkbox, Form, Input, Card, Row, message } from 'antd';
 import { SendOutlined } from '@ant-design/icons';
 import loginBackgound from '../../Assets/img/loginbackground.png'
 import { userLogin } from '../../Services/User/userController';
@@ -14,7 +14,11 @@ export const UserLogin = () => {
         let {email, password} = values;
         userLogin(email, password).then((res)=>{
             console.log(res);
-            navigate('/dashboard');
+            if(res!==undefined){
+                navigate('/dashboard');
+            }else{
+                message.error('Usuario o contraseña incorrectos');
+            }
         })
     };
 
