@@ -4,6 +4,7 @@ import './App.css'
 import { UseTestingBackend } from './Services/User/TestBackend'
 import {BrowserRouter,Route,Routes} from 'react-router-dom'
 import Index from './Components/User/UI/index';
+import Products from './Components/User/UI/products';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -19,13 +20,14 @@ function App() {
     })
   },[])
 
-  console.log("dataTesting", dataTesting[0])
+  //console.log("dataTesting", dataTesting[0])
 
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<Index/>}/>
+          <Route path='/products' element={<Products/>}/>
         </Routes>
       </BrowserRouter>
     </div>
