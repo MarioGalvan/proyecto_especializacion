@@ -2,11 +2,20 @@ import React from 'react'
 import { Button, Checkbox, Form, Input, Card, Row } from 'antd';
 import { SendOutlined } from '@ant-design/icons';
 import loginBackgound from '../../Assets/img/loginbackground.png'
+import { userLogin } from '../../Services/User/userController';
+import { useNavigate } from 'react-router-dom';
 
 export const UserLogin = () => {
 
+    let navigate = useNavigate();
+
     const onFinish = (values) => {
         console.log('Success:', values);
+        let {email, password} = values;
+        userLogin(email, password).then((res)=>{
+            console.log(res);
+            navigate('/categorias');
+        })
     };
 
     const onFinishFailed = (errorInfo) => {
@@ -22,34 +31,35 @@ export const UserLogin = () => {
             height: '100%',
             backgroundImage: `url(${loginBackgound})`,
         }}>
-               
+
 
             <Card
                 cover={
-                  <Row justify='center'>
-                      <img src="https://theburguerfactory.com/wp-content/uploads/2020/10/favicon.png" alt="logo" style={{ width: '50%', height: '50%', borderRadius: 12, margin:4 }} />
-                  </Row>
+                    <Row justify='center'>
+                        <img src="https://theburguerfactory.com/wp-content/uploads/2020/10/favicon.png" alt="logo" style={{ width: '50%', height: '50%', borderRadius: 12, margin: 4 }} />
+                    </Row>
                 }
                 hoverable
                 bordered
-                style={{ width: 400, borderRadius: 12, height: 400,
+                style={{
+                    width: 500, borderRadius: 12, height: 500,
                     borderWidth: 2,
                     borderColor: '#422E20'
                 }}>
-                
+
                 <Form
                     style={{
                         position: 'absolute',
                         top: '60%',
-                        left: '10%',
+                        left: '20%',
                     }}
                     name="basic"
-                    // labelCol={{
-                    //     span: 8,
-                    // }}
-                    // wrapperCol={{
-                    //     span: 16,
-                    // }}
+                    labelCol={{
+                        span: 4,
+                    }}
+                    wrapperCol={{
+                        span: 24,
+                    }}
                     initialValues={{
                         remember: true,
                     }}
@@ -58,14 +68,18 @@ export const UserLogin = () => {
                     autoComplete="off"
                 >
                     <Form.Item
-                        label="Usuario"
-                        name="username"
+                        label="Email"
+                        name="email"
                         rules={[
                             {
-                                required: true,
-                                message: 'Este campo es obligatorio',
+                              type: 'email',
+                              message: 'Email no válido',
                             },
-                        ]}
+                            {
+                              required: true,
+                              message: 'Este campo es obligatorio',
+                            },
+                          ]}
                     >
                         <Input />
                     </Form.Item>
@@ -78,6 +92,10 @@ export const UserLogin = () => {
                                 required: true,
                                 message: 'Este campo es obligatorio',
                             },
+                            {
+                                max: 10,
+                                message: 'La contraseña debe tener un máximo de 10 caracteres',
+                            }
                         ]}
                     >
                         <Input.Password />
@@ -85,10 +103,10 @@ export const UserLogin = () => {
 
 
                     <Form.Item
-                    wrapperCol={{
-                        offset: 6,
-                        span: 16,
-                    }}
+                        wrapperCol={{
+                            offset: 6,
+                            span: 16,
+                        }}
                     >
                         <Button icon={<SendOutlined />} size="middle" shape='round' style={{
                             background: '#422E20',
